@@ -7,16 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 10.times do
+  descStr = ""
+  typeStr = ""
+  def set_type
+    selector = rand(3)
+    typeStr << "Front" if selector == 0
+    typeStr << "Back" if selector == 1
+    typeStr << "Design" if selector == 2
+  end
+
   5.times do
-    newStr = ""
-    newStr << Faker::RickAndMorty.quote + ", "
-    newStr << "\n\n"
+    descStr << Faker::RickAndMorty.quote + ", "
+    descStr << "\n\n"
   end
   project = Project.new({
-    name: Faker::Overwatch.hero,
+    title: Faker::Overwatch.hero,
     url: nil,
-    description: ,
+    description: descStr,
     img_url: Faker::Fillmurray.image,
-    type:
+    type: typeStr
     })
+  project.save!
 end
