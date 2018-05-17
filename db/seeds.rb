@@ -9,22 +9,29 @@
 10.times do
   descStr = ""
   typeStr = ""
+  bill = 1
+
   def set_type
     selector = rand(3)
-    typeStr << "Front" if selector == 0
-    typeStr << "Back" if selector == 1
-    typeStr << "Design" if selector == 2
+    if selector == 0
+      typeStr << "Front"
+    elsif selector == 1
+      typeStr << "Back"
+    elsif selector == 2
+      typeStr << "Design"
+    end
   end
 
   5.times do
     descStr << Faker::RickAndMorty.quote + ", "
     descStr << "\n\n"
   end
+
   project = Project.new({
     title: Faker::Overwatch.hero,
     url: nil,
     description: descStr,
-    img_url: Faker::Fillmurray.image,
+    img_url: Faker::Fillmurray.image(true, 200, (rand(10) * 100)),
     type: typeStr
     })
   project.save!
